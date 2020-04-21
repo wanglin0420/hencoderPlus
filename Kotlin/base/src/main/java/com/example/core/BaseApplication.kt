@@ -9,8 +9,10 @@ import android.content.Context
  */
 class BaseApplication : Application() {
     companion object {
-        private lateinit var currentApplication: Context
-        fun currentApplication() = currentApplication
+        @JvmStatic
+        @get:JvmName("currentApplication")//在java代码中如果要调用get方法就可以直接使用currentApplication  了
+        lateinit var currentApplication: Context
+            private set
     }
 
 

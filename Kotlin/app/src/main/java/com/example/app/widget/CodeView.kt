@@ -16,24 +16,17 @@ import java.util.*
  *Author:wangling
  *Date:2020/4/20 2:14 PM
  */
-class CodeView : AppCompatTextView {
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
-        gravity = Gravity.CENTER
-        setBackgroundColor(getContext().getColor(R.color.colorPrimary))
-        setTextColor(Color.WHITE)
-
-        paint.isAntiAlias = true
-        paint.style = Paint.Style.STROKE
-        paint.color = getContext().getColor(R.color.colorAccent)
-        paint.strokeWidth = dp2px(6f)
-
-        updateCode()
+class CodeView @JvmOverloads constructor(context: Context, attrs: AttributeSet?=null) : AppCompatTextView(context, attrs) {
+/*
+apply->this
+let ->it 且最后一行需要返回  return @let it
+ */
+    private var paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        color = getContext().getColor(R.color.colorAccent)
+        strokeWidth = 6f.dp2px()
     }
-
-    private var paint = Paint()
     private var codeList = arrayOf(
             "kotlin",
             "android",
@@ -44,6 +37,18 @@ class CodeView : AppCompatTextView {
             "retrofit",
             "tcp/ip"
     )
+
+    init {
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+        gravity = Gravity.CENTER
+        setBackgroundColor(getContext().getColor(R.color.colorPrimary))
+        setTextColor(Color.WHITE)
+
+
+
+        updateCode()
+    }
+
 
     fun updateCode() {
         val random = Random().nextInt(codeList.size)

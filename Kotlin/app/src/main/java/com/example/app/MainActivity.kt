@@ -1,5 +1,6 @@
 package com.example.app
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -17,6 +18,10 @@ import com.example.lesson.LessonActivity
  *Author:wangling
  *Date:2020/4/20 12:41 PM
  */
+fun Activity.log(text: String) {
+    println(text)
+}
+
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val usernameKey = "username"
     private val passwordKey = "password"
@@ -37,6 +42,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         findViewById<Button>(R.id.btn_login).setOnClickListener(this)
         findViewById<CodeView>(R.id.code_view).setOnClickListener(this)
+
+        log("wasd")
     }
 
 
@@ -54,23 +61,28 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         var code = et_code.text.toString()
 
         val user = User(username, password, code)
-        if (verify(user)) {
+
+        fun verify(): Boolean {
+            if (user.username?.length ?: 0 < 4) {
+                Utils.toast("用户名不合法")
+                return false
+            }
+            if (user.password?.length ?: 0 < 4) {
+                Utils.toast("密码不合法")
+                return false
+            }
+
+            return true
+        }
+
+        if (verify()) {
             save(usernameKey, username)
             save(passwordKey, password)
             startActivity(Intent(this, LessonActivity::class.java))
         }
+
+
     }
 
-    private fun verify(user: User): Boolean {
-        if (user.username != null && user.username!!.length < 4) {
-            Utils.toast("用户名不合法")
-            return false
-        }
-        if (user.password != null && user.password!!.length < 4) {
-            Utils.toast("密码不合法")
-            return false
-        }
 
-        return true
-    }
 }

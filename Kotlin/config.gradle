@@ -1,0 +1,10 @@
+ext {
+    dependencies = [
+            //network
+            "okhttp"        : "com.squareup.okhttp3:okhttp:3.10.0",
+            "retrofit"      : "com.squareup.retrofit2:retrofit:2.4.0",
+            "converter-gson": "com.squareup.retrofit2:converter-gson:2.4.0",
+            "adapter-rxjava": "com.squareup.retrofit2:adapter-rxjava2:2.4.0",
+    ]
+}
+

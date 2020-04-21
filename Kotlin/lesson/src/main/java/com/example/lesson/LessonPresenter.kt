@@ -2,7 +2,7 @@ package com.example.lesson
 
 import com.example.core.http.EntityCallback
 import com.example.core.http.HttpClient.get
-import com.example.core.utils.Utils.toast
+import com.example.core.utils.Utils
 import com.example.lesson.entity.Lesson
 import com.google.gson.reflect.TypeToken
 
@@ -21,7 +21,7 @@ class LessonPresenter {
         this.activity = activity
     }
 
-    private var lessons :List<Lesson> =ArrayList()
+    private var lessons: List<Lesson> = ArrayList()
     private val type = object : TypeToken<List<Lesson?>?>() {}.type
 
     fun fetchData() {
@@ -32,18 +32,13 @@ class LessonPresenter {
             }
 
             override fun onFailure(message: String?) {
-                activity.runOnUiThread { toast(message!!) }
+                activity.runOnUiThread { Utils.toast(message!!) }
             }
         })
     }
 
     fun showPlayback() {
-        val playbackLessons: MutableList<Lesson> = java.util.ArrayList()
-        for (lesson in lessons) {
-            if (lesson.state === Lesson.State.PLAYBACK) {
-                playbackLessons.add(lesson)
-            }
-        }
-        activity.showResult(playbackLessons)
+//        lessons.forEach { if (it.state === Lesson.State.PLAYBACK){} }
+        activity.showResult(lessons.filter { it.state === Lesson.State.PLAYBACK })
     }
 }
