@@ -6,5 +6,5 @@ package com.example.core
  *Date:3/22/21 6:31 PM
  */
 interface BaseView<T> {
-    fun getPresenter():T
+    val presenter:T
 }

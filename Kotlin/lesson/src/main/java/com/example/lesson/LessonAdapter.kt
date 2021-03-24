@@ -41,17 +41,13 @@ class LessonAdapter : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
         }
 
         fun onBind(lesson: Lesson) {
-            var date = lesson.date
-            if (date == null) {
-                date = "日期待定"
-            }
+            var date = lesson.date ?: "日期待定"
             setText(R.id.tv_date, date)
 
             setText(R.id.tv_content, lesson.content)
 
-            val state = lesson.state
 
-            state?.let {
+            lesson.state?.let {
                 setText(R.id.tv_state, it.stateName())
                 var colorRes = when (it) {
                     Lesson.State.PLAYBACK -> R.color.playback

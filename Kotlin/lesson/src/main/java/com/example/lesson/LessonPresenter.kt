@@ -35,12 +35,14 @@ class LessonPresenter(var activity: LessonActivity) {
     }
 
     fun showPlayback() {
-        var playbackLessons: MutableList<Lesson> = ArrayList()
-        for (lesson in lessons) {
-            if (lesson.state .equals(Lesson.State.PLAYBACK) ) {
-                playbackLessons.add(lesson)
-            }
-        }
+//        var playbackLessons: MutableList<Lesson> = ArrayList()
+
+//        lessons.forEach {
+//            if (it.state == Lesson.State.PLAYBACK) {
+//                playbackLessons.add(it)
+//            }
+//        }
+        var playbackLessons=lessons.filter { it.state == Lesson.State.PLAYBACK }
         activity.showResult(playbackLessons)
     }
 }

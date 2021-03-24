@@ -25,16 +25,15 @@ class CodeView : AppCompatTextView {
         gravity = (Gravity.CENTER)
         setBackgroundColor(getContext().getColor(R.color.colorPrimary))
         setTextColor(Color.WHITE)
-
-        paint.isAntiAlias = true
-        paint.style = Paint.Style.STROKE
-        paint.setColor(getContext().getColor(R.color.colorAccent))
-        paint.strokeWidth = Utils.dp2px(6f)
-
         updateCode()
     }
 
-    var paint = Paint()
+    var paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        color = context.getColor(R.color.colorAccent)
+        strokeWidth = Utils.dp2px(6f)
+    }
 
     var codeList = arrayListOf("kotlin",
             "android",
