@@ -37,7 +37,7 @@ class LessonPresenter(var activity: LessonActivity) {
     fun showPlayback() {
         var playbackLessons: MutableList<Lesson> = ArrayList()
         for (lesson in lessons) {
-            if (lesson.state == Lesson.State.PLAYBACK) {
+            if (lesson.state .equals(Lesson.State.PLAYBACK) ) {
                 playbackLessons.add(lesson)
             }
         }
